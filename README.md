@@ -50,41 +50,66 @@ Project structure (important files/folders):
 - `src/components/primitives/` — reusable primitives
   - `Button.tsx`, `Modal.tsx`, `Select.tsx`
 - `src/hooks/` — hooks
-  - `useCalendar.ts` — date/view state
-  - `useEventManager.ts` — event CRUD in memory
-- `src/utils/` — helpers
-  - `date.utils.ts`, `event.utils.ts`
-- `src/styles/globals.css` — Tailwind base + UI token overrides
-- `tailwind.config.js` — theme tokens (beige primary palette)
-- `vite.config.ts` — includes `@` -> `src` path alias
+  **Calendar View Component**
 
-Customization notes:
-- Theme colors: edit `tailwind.config.js` under `theme.extend.colors.primary` to tweak the beige/cream palette.
-- Global styles and component tokens: `src/styles/globals.css` contains button, card, and modal helpers. Update these classes to adjust shadows/spacing/animations.
-- Event colors: default event colors are defined in `src/utils/event.utils.ts` (constant `EVENT_COLORS`). If you want all events to use a curated beige-accent palette, update that array.
+  Live Storybook: (paste deployed Storybook URL here)
 
-Accessibility & Responsiveness:
-- The Events panel is shown as a sidebar on medium+ screens and as a drawer on small screens.
-- Interactive elements use semantic buttons and have focus/aria attributes where applicable.
-- Modal can be closed with the Escape key or backdrop click.
+  ## Installation
 
-Development tips & ideas:
-- Persist events: replace the in-memory `useEventManager` storage with localStorage or backend API calls.
-- Drag & drop: implement drag-and-drop to move events between dates (React DnD or similar library).
-- Tooling: run `npm run lint` to check code style and `npm run build` to verify type and build success.
+  ```powershell
+  cd "C:\Users\vkpal\OneDrive\Desktop\My-calander-project\my-calendar-app"
+  npm install
+  npm run dev
+  ```
 
-Troubleshooting:
-- If the dev server fails on startup, run `npm install` again and ensure Node version is recent (Node 18+ recommended).
-- If TypeScript complains about path aliases, ensure `vite.config.ts` has the alias and `tsconfig.app.json` includes
-  ``"paths": { "@/*": ["src/*"] }``
-- If CSS does not show Tailwind utilities, confirm `postcss.config.cjs` and `tailwind.config.js` exist and that `src/styles/globals.css` is imported in `main.tsx`.
+  Run Storybook locally:
 
-Contributing:
-- Create a feature branch, make changes, run `npm run build` and `npm run lint` locally. Open a PR with a concise description.
+  ```powershell
+  npm run storybook
+  ```
 
-License & contact:
-- This project contains no explicit license file; add one (e.g., MIT) if you plan to share it publicly.
-- If you'd like me to continue design or implement features (drag/drop, persistence, color mapping), tell me which feature to prioritize.
+  Build Storybook:
 
----
-Generated: November 13, 2025
+  ```powershell
+  npm run build-storybook
+  ```
+
+  ## Architecture
+
+  - `src/components/Calendar/CalendarView.tsx` — main calendar container
+  - `src/components/Calendar/MonthView.tsx` & `WeekView.tsx` — view renderers
+  - `src/components/Calendar/EventModal.tsx` — event form modal
+  - `src/components/Calendar/EventsPanel.tsx` — right-hand events list
+  - `src/components/primitives` — `Button`, `Modal`, `Select`
+  - `src/hooks` — `useCalendar`, `useEventManager`
+  - `src/utils` — date and event helpers
+
+  ## Features
+
+  - Month/Week views
+  - Add/Edit/Delete events
+  - Responsive Events panel (Today / Upcoming / Past)
+  - Keyboard accessibility and ARIA attributes
+
+  ## Storybook Stories
+
+  1. Default — Current month with sample events
+  2. Empty — Calendar with no events
+  3. Week View — Week view demonstration
+  4. Large Dataset — 20+ events
+  5. Interactive — event CRUD playground
+
+  ## Technologies
+
+  - React + TypeScript
+  - Vite
+  - Tailwind CSS
+  - Storybook
+
+  ## Next steps I can do for you
+
+  - Deploy Storybook to Vercel/Netlify/Chromatic
+  - Add localStorage persistence for events
+  - Map event colors to the beige palette
+
+  If you want any of these next steps, tell me which to prioritize.
