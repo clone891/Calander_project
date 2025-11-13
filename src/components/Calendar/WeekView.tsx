@@ -14,9 +14,9 @@ export const WeekView: React.FC<WeekViewProps> = ({
   const timeSlots = getTimeSlots(30); // 30-minute intervals
   
   return (
-    <div className="bg-white rounded-lg shadow-card overflow-hidden">
+    <div className="card-soft overflow-hidden">
       <div className="grid grid-cols-8 bg-neutral-50 border-b border-neutral-200">
-        <div className="py-3 px-2 text-sm font-semibold text-neutral-700">
+        <div className="py-3 px-2 text-sm font-semibold text-primary-700">
           Time
         </div>
         {daysInWeek.map(day => (

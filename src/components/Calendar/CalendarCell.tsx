@@ -28,11 +28,11 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
   return (
     <div
       className={clsx(
-        'border border-neutral-200 h-32 p-2 cursor-pointer transition-colors',
-        'hover:bg-neutral-50',
+        'border border-neutral-200 h-32 p-2 cursor-pointer transition-all duration-150 ease-in-out transform',
+        'hover:shadow-sm hover:scale-[1.01] hover:bg-primary-50/40',
         !isCurrentMonth && 'bg-neutral-50 text-neutral-500',
-        isSelected && 'bg-primary-50 border-primary-300',
-        today && 'bg-primary-50'
+        isSelected && 'bg-primary-100 border-primary-300',
+        today && 'bg-primary-100'
       )}
       onClick={handleClick}
       role="button"
@@ -59,8 +59,8 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
         {events.slice(0, 3).map(event => (
           <div
             key={event.id}
-            className="text-xs px-2 py-1 rounded truncate cursor-pointer hover:opacity-80"
-            style={{ backgroundColor: event.color || '#3b82f6', color: 'white' }}
+            className="text-xs px-2 py-1 rounded truncate cursor-pointer hover:opacity-90 transition-all duration-150 ease-in-out"
+            style={{ backgroundColor: event.color || '#cbbf80', color: 'white', boxShadow: '0 1px 2px rgba(0,0,0,0.06)' }}
             onClick={(e) => handleEventClick(e, event)}
           >
             {event.title}
@@ -68,7 +68,7 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
         ))}
 
         {eventCount > 3 && (
-          <button className="text-xs text-primary-600 hover:underline">
+          <button className="text-xs text-primary-700 hover:underline">
             +{eventCount - 3} more
           </button>
         )}

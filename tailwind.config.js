@@ -7,17 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Beige / cream primary palette for a warm, minimal look
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#f9f6f2',
+          100: '#f3ede4',
+          200: '#eadfc9',
+          300: '#e0cfac',
+          400: '#d6bf8f',
+          500: '#cbbf80',
+          600: '#bda875',
+          700: '#a38f60',
+          800: '#8a7150',
+          900: '#6e523e',
         },
         neutral: {
           50: '#fafafa',
@@ -49,6 +50,10 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      // small extras for softer UI
+      borderRadius: {
+        lgcard: '12px'
       },
       boxShadow: {
         card: '0 1px 3px rgba(0, 0, 0, 0.1)',

@@ -70,10 +70,10 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      <div className="bg-white rounded-lg shadow-card mb-6 p-4">
+      <div className="card-soft mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold text-neutral-900">
+            <h1 className="text-2xl font-bold text-primary-800">
               {view === 'month' ? getMonthName(currentDate) : 'Week'} {currentDate.getFullYear()}
             </h1>
             
@@ -97,7 +97,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="bg-neutral-100 rounded-lg p-1 flex">
+            <div className="bg-primary-50 rounded-lg p-1 flex">
               <button
                 className={clsx(
                   'px-3 py-1 rounded-md text-sm font-medium',
