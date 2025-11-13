@@ -4,6 +4,7 @@ import { useCalendar } from '@/hooks/useCalendar';
 import { MonthView } from './MonthView';
 import { WeekView } from './WeekView';
 import { EventModal } from './EventModal';
+import { EventsPanel } from './EventsPanel';
 import { Button } from '@/components/primitives/Button';
 import { getMonthName } from '@/utils/date.utils';
 import clsx from 'clsx';
@@ -30,6 +31,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
+  const [showEventsPanel, setShowEventsPanel] = useState(false);
 
   const handleDateClick = (date: Date) => {
     selectDate(date);
@@ -97,6 +99,13 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           </div>
           
           <div className="flex items-center space-x-2">
+            {/* Events toggle for small screens */}
+            <button
+              onClick={() => setShowEventsPanel(v => !v)}
+              className="md:hidden px-3 py-1 rounded-md bg-primary-600 text-white text-sm"
+            >
+              Events
+            </button>
             <div className="bg-primary-50 rounded-lg p-1 flex">
               <button
                 className={clsx(
@@ -129,20 +138,42 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
         </div>
       </div>
 
-      {view === 'month' ? (
-        <MonthView
-          currentDate={currentDate}
-          events={events}
-          onDateClick={handleDateClick}
-          onEventClick={handleEventClick}
-        />
-      ) : (
-        <WeekView
-          currentDate={currentDate}
-          events={events}
-          onEventClick={handleEventClick}
-          onTimeSlotClick={handleTimeSlotClick}
-        />
+      <div className="flex gap-6">
+        <main className="flex-1">
+          {view === 'month' ? (
+            <MonthView
+              currentDate={currentDate}
+              events={events}
+              onDateClick={handleDateClick}
+              onEventClick={handleEventClick}
+            />
+          ) : (
+            <WeekView
+              currentDate={currentDate}
+              events={events}
+              onEventClick={handleEventClick}
+              onTimeSlotClick={handleTimeSlotClick}
+            />
+          )}
+        </main>
+
+        {/* Sidebar for md+ screens */}
+        <div className="hidden md:block w-80">
+          <EventsPanel events={events} />
+        </div>
+      </div>
+
+      {/* Mobile drawer for events */}
+      {showEventsPanel && (
+        <div className="modal-backdrop md:hidden" onClick={() => setShowEventsPanel(false)}>
+          <div className="modal-panel max-w-sm mx-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold text-primary-800">Events</h3>
+              <button className="px-2 py-1 text-sm text-neutral-600" onClick={() => setShowEventsPanel(false)}>Close</button>
+            </div>
+            <EventsPanel events={events} />
+          </div>
+        </div>
       )}
 
       <EventModal
